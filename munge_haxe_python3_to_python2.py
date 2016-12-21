@@ -3,6 +3,15 @@ import sys
 from pkg_resources import replace
 import re
 
+'''
+This code is the worst thing in the world. You've never seen such a wtf.
+What it does is to mangle the code that Haxe produces for sUTL for Python3, so that it works under Python2.
+The proper approach would be to change the generator for Haxe Python so that it generates code that works for 
+both Python2 and Python3, or to make a separate Python2 generator. But that can wait for another day.
+This code is stupidly brittle, but at least there's a decent test suite which will break if something breaks 
+this (eg: if a new version of Haxe's python generator generates slightly different code).
+'''
+
 def main():
     sys.stdout.writelines(["from __future__ import unicode_literals\n"])
     sys.stdout.writelines(["from __future__ import division\n"])
