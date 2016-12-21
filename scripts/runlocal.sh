@@ -13,11 +13,12 @@ git pull origin master  || { echo '011' ; exit 1; }
 #2: Run generate and run tests
 cd "$1" || { echo '020' ; exit 1; }
 /usr/bin/haxe buildtests.hxml || { echo '030' ; exit 1; }
-python "$1/fixpy.py" < "$1/sUTLHaxePython/sUTLTestsPre.py" > "$1/sUTLHaxePython/sUTLTests.py" || { echo '035' ; exit 1; }
-python "$1/sUTLHaxePython/sUTLTests.py" || { echo '040' ; exit 1; }
+python "$1/fixpy.py" < "$1/sUTLHaxePython/sUTLTests3.py" > "$1/sUTLHaxePython/sUTLTests2.py" || { echo '035' ; exit 1; }
+python "$1/sUTLHaxePython/sUTLTests2.py" || { echo '040' ; exit 1; }
 
 #3: Generate the python interpreter
 /usr/bin/haxe build.hxml || { echo '050' ; exit 1; }
+python "$1/fixpy.py" < "$1/sUTLHaxePython/sUTL3.py" > "$1/sUTLHaxePython/sUTL2.py" || { echo '055' ; exit 1; }
 
 #4: Push the new interpreter to the repo
 cd "$1/sUTLHaxePython" || { echo '060' ; exit 1; }
